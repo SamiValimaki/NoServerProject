@@ -1,0 +1,84 @@
+<header class="header">
+</header>
+<div class="row">
+  <div class="col-sm-12" style="margin-top:15px">
+    <div class="col-sm-4">
+      <p>Find out if the Force is strong with you. Put your force abilities to the test with this Force Abilities Test.</p>
+      <p>Rules: The computer has selected an image from the choices below. Use the Force to guess which option the computer has selected.</p>
+    </div>
+    <div class="col-sm-2" ng-class="{'no-answer': correctAnswer==null, 'right-answer': correctAnswer==true, 'wrong-answer': correctAnswer==false}" style="min-height:200px; padding:0px">
+      <div ng-if='sw' class="swImage" ></div>
+      <image class="image" ng-if="correctImage != null" ng-src="./img/{{correctImage}}">
+    </div>
+    <div class="col-sm-4">
+      <div>
+        Guesses:
+        <span class="count">{{guessCount}}</span>
+        Correct
+        <span class="count">{{correctCount}}</span>
+        <p>Scoring:</p>
+            <p>0-3 Correct: A Noob to the Force. You are just starting your studies.</p>
+            <p>4-7 Correct: You must unlearn what you have learned. </p>
+            <p>8-9 Correct: Someday I will be the most powerful Jedi/Sith ever.</p>
+            <p>10 Correct: You are One with the Force, the Force is One with you. </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-bottom:10px">
+</div>
+<div class="row">
+  <section class="pic">
+    <div ng-repeat="character in characters" class="col-xs-2 col-sm-2 repeatedPhotos">
+      <div ng-click="userGuess($index)" class="pic2">
+        <img class="image" ng-src="./img/{{character.fileName}}">
+      </div>
+      <div class="text-center" style="margin-top: 3px;">
+        <button class="btn btn-default btn-xs" ng-click="callApi(character.swapiValue)">Character Info</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<main-footer>
+</main-footer>
+
+
+<div class="modal fade" id="game-over-modal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>Game Over!</h4>
+      </div>
+      <div class="modal-body">
+        You got {{finalScore}} correct!
+      </div>
+      <div class="modal-footer">
+        <button ng-click="startGame()" class="btn btn-default" data-dismiss="modal">Play Again!</button>
+        <button ng-click="startGame()" class="btn btn-default" data-dismiss="modal">Quit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="swapi-modal" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4>{{apiResult.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>Name: {{apiResult.name}}</p>
+        <p>Height: {{apiResult.height}}</p>
+        <p>Mass: {{apiResult.mass}}</p>
+        <p>Hair Color: {{apiResult.hair_color}}</p>
+        <p>Skin Color: {{apiResult.skin_color}}</p>
+        <p>Eye Color: {{apiResult.eye_color}}</p>
+        <p>Birth Year: {{apiResult.birth_year}}</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
